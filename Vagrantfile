@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.module_path = "modules"
-    puppet.manifest_file  = "vagrant.pp"
+    puppet.manifest_file  = "hart.pp"
   end
 
 end
