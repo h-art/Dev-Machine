@@ -68,6 +68,27 @@ file { '/etc/apache2/apache2.conf':
     content => template('apache2/apache2.conf.erb'),
 }
 
+# php config for apache and cli
+file { '/etc/php5/apache2/php.ini':
+    require => Package['libapache2-mod-php5'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('apache2/php.ini.erb'),
+}
+
+file { '/etc/php5/cli/php.ini':
+    require => Package['libapache2-mod-php5'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('php5/php.ini.erb'),
+}
+
 # activate mod-rewrite
 file { '/etc/apache2/mods-enabled/rewrite.load':
     require => Package['apache2'],
