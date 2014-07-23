@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+  DocumentRoot "/vagrant"
+  DirectoryIndex index.php
+  ServerName vgrnt
+  SetEnv APP_ENV local
+
+  <Directory "/vagrant">
+    AllowOverride All
+  </Directory>
+</VirtualHost>
