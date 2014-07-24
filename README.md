@@ -28,3 +28,14 @@ I sorgenti del progetto devono essere inclusi nella stessa cartella di vagrant.
 Per personalizzare il virtualhost dell'ambiente, modificare il file
 
 *[DIRECTORY_DEV_MACHINE]/modules/apache2/default.erb*
+
+
+## Configurazione presente
+* composer
+* php 5.4.30 ( http://192.168.33.10/info.php )
+* phpmyadmin ( http://192.168.33.10/phpmyadmin ) user: root, pass: root
+* php5-intl
+* php5-curl
+* php5-mcrypt
+* php5-imagick
+* php5-apc
