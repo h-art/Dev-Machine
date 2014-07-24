@@ -10,10 +10,14 @@
   
     *vagrant box add hashicorp/precise64*
     
-  
-3. eseguire
+
+3. scaricare lo zip del repository in una cartella a scelta.
+4. Dalla cartella scelta eseguire
 
   *vagrant up*
+ 
+ 
+La cartella scelta sarà condivisa con la VM, quindi il progetto deve essere inserito all'interno della cartella stessa.
   
 L'indirizzo ip di default per accedere alla nuova macchina virtuale è 
 
