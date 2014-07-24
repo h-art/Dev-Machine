@@ -1,6 +1,6 @@
 ### H-ART development provisioning
 
-1. installare vagrant ( se non già installato)
+1. installare vagrant se non già installato (Versione di riferimento Vagrant 1.6.3 )
 
 2. eseguire 
 
