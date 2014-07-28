@@ -131,6 +131,36 @@ exec { "apt-update":
     command => "sudo apt-get update",
 }
 
+##################
+# install nodejs #
+##################
+exec { "install-nodejs":
+    unless => "which node",
+    path => ["/bin", "/usr/bin"],
+    command => "wget http://nodejs.org/dist/v0.10.29/node-v0.10.29-linux-x64.tar.gz && tar xvzf node-v0.10.29-linux-x64.tar.gz && rm node-v0.10.29-linux-x64/LICENSE node-v0.10.29-linux-x64/README.md node-v0.10.29-linux-x64/ChangeLog && sudo cp -R node-v0.10.29-linux-x64/* /usr/local/ && rm -rf node-v0.10.29-linux-x64*"
+}
+
+exec { "install-bower":
+    require => Exec['install-nodejs'],
+    unless => "npm ls -g | grep bower",
+    path => ["/bin", "/usr/local/bin", "/usr/bin"],
+    command => "sudo npm install bower@1.3.8 -g"
+}
+
+exec { "install-grunt-cli":
+    require => Exec['install-nodejs'],
+    unless => "npm ls -g | grep grunt-cli",
+    path => ["/bin", "/usr/local/bin", "/usr/bin"],
+    command => "sudo npm install grunt-cli@0.1.13 -g"
+}
+
+exec { "install-gulp":
+    require => Exec['install-nodejs'],
+    unless => "npm ls -g | grep gulp",
+    path => ["/bin", "/usr/local/bin", "/usr/bin"],
+    command => "sudo npm install gulp@3.8.6 -g"
+}
+
 # install composer
 exec { "install-composer":
     unless => 'ls /usr/local/bin/composer',
