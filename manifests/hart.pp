@@ -136,7 +136,7 @@ exec { "apt-update":
 ##################
 exec { "install-nodejs":
     unless => "which node",
-    path => ["/bin", "/usr/bin"],
+    path => ["/bin", "/usr/bin", "/usr/local/bin"],
     command => "wget http://nodejs.org/dist/v0.10.29/node-v0.10.29-linux-x64.tar.gz && tar xvzf node-v0.10.29-linux-x64.tar.gz && rm node-v0.10.29-linux-x64/LICENSE node-v0.10.29-linux-x64/README.md node-v0.10.29-linux-x64/ChangeLog && sudo cp -R node-v0.10.29-linux-x64/* /usr/local/ && rm -rf node-v0.10.29-linux-x64*"
 }
 
