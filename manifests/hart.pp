@@ -204,3 +204,30 @@ file { "/etc/apt/sources.list.d/php5.list":
     replace => "yes",
     content => template('apt/php5.list.erb'),
 }
+
+#############################
+# install ruby and rubygems #
+#############################
+package { "ruby1.9.3": ensure => "installed", require => Exec['apt-update'] }
+
+# install default gemset
+exec { "install-sass":
+    require => Package['ruby1.9.3'],
+    unless => "gem list | grep sass",
+    path => ["/bin", "/usr/bin"],
+    command => "sudo gem install sass -v 3.3.11"
+}
+
+exec { "install-compass":
+    require => Package['ruby1.9.3'],
+    unless => "gem list | grep compass",
+    path => ["/bin", "/usr/bin"],
+    command => "sudo gem install compass -v 0.12.7"
+}
+
+exec { "install-jekyll":
+    require => Package['ruby1.9.3'],
+    unless => "gem list | grep jekyll",
+    path => ["/bin", "/usr/bin"],
+    command => "sudo gem install jekyll -v 2.1.1"
+}
