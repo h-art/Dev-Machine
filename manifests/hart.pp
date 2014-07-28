@@ -9,6 +9,7 @@
 # packages definition
 package { "vim":                    ensure => "installed", require => Exec['apt-update'] }
 package { "apache2":                ensure => "installed", require => Exec['apt-update'] }
+package { "git":                    ensure => "installed", require => Exec['apt-update'] }
 package { "curl":                   ensure => "installed", require => Exec['apt-update'] }
 package { "build-essential":        ensure => "installed", require => Exec['apt-update'] }
 package { "php5-cli":               ensure => "installed", require => Package['apache2'] }
