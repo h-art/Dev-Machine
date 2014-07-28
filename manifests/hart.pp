@@ -104,6 +104,28 @@ file { '/etc/apache2/conf.d/phpmyadmin':
     target => '/etc/phpmyadmin/apache.conf',
 }
 
+# configure phpmyadmin
+file { '/etc/phpmyadmin/config.inc.php':
+    require => Package['phpmyadmin'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('phpmyadmin/config.inc.php.erb'),
+}
+
+# configure phpmyadmin blowfish_secret
+file { '/var/lib/phpmyadmin/blowfish_secret.inc.php':
+    require => Package['phpmyadmin'],
+    ensure  => "present",
+    mode    => 640,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('phpmyadmin/blowfish_secret.inc.php.erb'),
+}
+
 # define a file to trigger apache2 and mysql services
 # each time a provisioning is launched
 file { "/tmp/restart.txt":
