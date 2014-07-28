@@ -170,7 +170,7 @@ exec { "install-composer":
 }
 
 exec { "install-xdebug":
-    require => Package['build-essential', 'php5-cli'],
+    require => Package['build-essential', 'php5-cli', 'php5-dev', 'libapache2-mod-php5'],
     unless => "ls /usr/lib/php5/20100525/xdebug.so",
     path => ["/bin", "/usr/bin"],
     command => "sudo pecl install xdebug"
