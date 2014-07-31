@@ -1,10 +1,10 @@
 <VirtualHost *:80>
-  DocumentRoot "/vagrant"
+  DocumentRoot "/vagrant/src"
   DirectoryIndex index.php
   ServerName myapp.dev
   SetEnv APP_ENV local
 
-  <Directory "/vagrant">
+  <Directory "/vagrant/src">
     AllowOverride All
   </Directory>
 </VirtualHost>
