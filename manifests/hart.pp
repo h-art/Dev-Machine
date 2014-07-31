@@ -10,6 +10,7 @@
 package { "vim":                    ensure => "installed", require => Exec['apt-update'] }
 package { "apache2":                ensure => "installed", require => Exec['apt-update'] }
 package { "git":                    ensure => "installed", require => Exec['apt-update'] }
+package { "memcached":              ensure => "installed", require => Exec['apt-update'] }
 package { "curl":                   ensure => "installed", require => Exec['apt-update'] }
 package { "build-essential":        ensure => "installed", require => Exec['apt-update'] }
 package { "php5-cli":               ensure => "installed", require => Package['apache2'] }
@@ -20,6 +21,7 @@ package { "libapache2-mod-php5":    ensure => "installed", require => Package['a
 package { "php5-intl":              ensure => "installed", require => Package['libapache2-mod-php5'] }
 package { "php5-curl":              ensure => "installed", require => Package['libapache2-mod-php5'] }
 package { "php5-mcrypt":            ensure => "installed", require => Package['libapache2-mod-php5'] }
+package { "php5-memcached":         ensure => "installed", require => Package['libapache2-mod-php5'] }
 package { "php5-mysql":             ensure => "installed", require => Package['libapache2-mod-php5', 'mysql-server'] }
 package { "php-apc":                ensure => "installed", require => Package['libapache2-mod-php5'] }
 package { "php5-imagick":           ensure => "installed", require => Package['libapache2-mod-php5'] }
