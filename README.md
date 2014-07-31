@@ -2,22 +2,22 @@
 
 1. installare vagrant se non già installato (Versione di riferimento Vagrant 1.6.3 )
 
-2. eseguire
+2. eseguire:
 
-    $ vagrant box list
+        $ vagrant box list
 
-  2a.  Se la box "hashicorp/precise64" non è già installata , eseguire
+3.  Se la box "hashicorp/precise64" non è già installata, eseguire:
 
-    $ vagrant box add hashicorp/precise64
+        $ vagrant box add hashicorp/precise64
 
-3. scaricare lo zip del repository in una cartella a scelta.
-4. Dalla cartella scelta eseguire
+4. scaricare lo zip del repository in una cartella a scelta.
+5. Dalla cartella scelta eseguire:
 
-    $ vagrant up
+        $ vagrant up
 
 La cartella scelta sarà condivisa con la VM, quindi il progetto deve essere inserito all'interno della cartella stessa.
 
-L'indirizzo ip di default per accedere alla nuova macchina virtuale è
+L'indirizzo ip di default per accedere alla nuova macchina virtuale è:
 
     192.168.33.10
 
@@ -29,7 +29,7 @@ Per personalizzare il virtualhost dell'ambiente, modificare il file
 
 ### Devify
 
-Utile script per gestire i progetti con la Dev Machine
+Utile script per gestire i progetti con la Dev Machine, va scaricato ed installato in un qualsiasi path di sistema che sia nella variabile di ambiente `$PATH`, ad esempio `/usr/local/bin` su sistemi MacOS X
 
     https://gist.github.com/mrosati84/2f1aecf0961260fe37ec
 
