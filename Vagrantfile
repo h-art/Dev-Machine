@@ -20,4 +20,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifest_file  = "hart.pp"
   end
 
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
 end
