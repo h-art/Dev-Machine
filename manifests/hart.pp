@@ -233,6 +233,13 @@ file { "/etc/apt/sources.list.d/php5.list":
 package { "ruby1.9.3": ensure => "installed", require => Exec['apt-update'] }
 
 # install default gemset
+exec { "install-bundler":
+    require => Package['ruby1.9.3'],
+    unless => "gem list | grep bundler",
+    path => ["/bin", "/usr/bin"],
+    command => "sudo gem install bundler -v 1.6.5"
+}
+
 exec { "install-sass":
     require => Package['ruby1.9.3'],
     unless => "gem list | grep sass",
