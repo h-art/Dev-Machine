@@ -1,12 +1,12 @@
 ### H-ART development provisioning
 
-1. installare vagrant se non già installato (Versione di riferimento Vagrant 1.6.3 )
+1. installare [Vagrant][1] se non già installato (Versione di riferimento Vagrant 1.6.3 )
 
 2. eseguire:
 
         $ vagrant box list
 
-3.  Se la box "hashicorp/precise64" non è già installata, eseguire:
+3.  Se la box [hashicorp/precise64][2] non è già installata, eseguire:
 
         $ vagrant box add hashicorp/precise64
 
@@ -15,7 +15,7 @@
 
         $ vagrant up
 
-La cartella scelta sarà condivisa con la VM, quindi il progetto deve essere inserito all'interno della cartella stessa.
+La cartella scelta sarà condivisa con la VM tramite [NSF][3], quindi il progetto deve essere inserito all'interno della cartella stessa.
 
 L'indirizzo ip di default per accedere alla nuova macchina virtuale è:
 
@@ -43,6 +43,12 @@ inizializza un nuovo progetto. In caso di progetto preesistente richiede il cons
 
 inizializza un nuovo progetto, clonando nella directory il progetto specificato come primo argomento.
 
+## Collegamento a MySQL
+
+La macchina virtuale è configurata in modo da permettere il collegamento remoto dell'utente `root` di MySQL. Per connettersi è sufficiente usare come host l'indirizzo IP specificato nel `Vagrantfile`, e usare l'utenza `root` con password `root`.
+
+Per l'amministrazione del database è consigliato l'uso su sistemi MacOS di [Sequel Pro][4]
+
 ## Configurazione presente
 * composer
 * php 5.4.30 ( http://192.168.33.10/info.php )
@@ -52,3 +58,9 @@ inizializza un nuovo progetto, clonando nella directory il progetto specificato 
 * php5-mcrypt
 * php5-imagick
 * php5-apc
+
+
+  [1]: http://www.vagrantup.com/
+  [2]: https://vagrantcloud.com/hashicorp/precise64
+  [3]: http://docs.vagrantup.com/v2/synced-folders/nfs.html
+  [4]: http://www.sequelpro.com/
