@@ -148,6 +148,17 @@ exec { "set-mysql-password":
     command => "mysqladmin -uroot password root",
 }
 
+# mysql configuration
+file { "/etc/mysql/my.cnf":
+    require => Package['apache2', 'mysql-server'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('mysql-server/my.cnf.erb'),
+}
+
 # update and upgrade APT
 exec { "apt-update":
     require => File['/etc/apt/sources.list.d/php5.list'],
