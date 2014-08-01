@@ -148,6 +148,13 @@ exec { "set-mysql-password":
     command => "mysqladmin -uroot password root",
 }
 
+# grant mysql remote access
+exec { "grant-mysql-remote-access":
+    require => Exec['set-mysql-password'],
+    path => ["/bin", "/usr/bin"],
+    command => "mysql -uroot -proot -e \"GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'192.168.33.1\' IDENTIFIED BY \'root\'\"",
+}
+
 # mysql configuration
 file { "/etc/mysql/my.cnf":
     require => Package['apache2', 'mysql-server'],
