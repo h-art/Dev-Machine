@@ -60,7 +60,7 @@ file { "/etc/apache2/sites-available/default":
     content => template('apache2/default.erb'),
 }
 
-# activate mod-rewrite
+# setup apache2 config from template
 file { '/etc/apache2/apache2.conf':
     require => Package['apache2'],
     ensure  => "present",
@@ -97,6 +97,13 @@ file { '/etc/apache2/mods-enabled/rewrite.load':
     require => Package['apache2'],
     ensure => 'link',
     target => '/etc/apache2/mods-available/rewrite.load',
+}
+
+# activate mod-headers
+file { '/etc/apache2/mods-enabled/headers.load':
+    require => Package['apache2'],
+    ensure => 'link',
+    target => '/etc/apache2/mods-available/headers.load',
 }
 
 # enable phpmyadmin
