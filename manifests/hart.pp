@@ -60,7 +60,7 @@ file { "/etc/apache2/sites-available/default":
     content => template('apache2/default.erb'),
 }
 
-# setup apache2 config from template
+# set apache2.conf file from template
 file { '/etc/apache2/apache2.conf':
     require => Package['apache2'],
     ensure  => "present",
@@ -70,6 +70,8 @@ file { '/etc/apache2/apache2.conf':
     replace => "yes",
     content => template('apache2/apache2.conf.erb'),
 }
+
+
 
 # php config for apache and cli
 file { '/etc/php5/apache2/php.ini':
@@ -155,24 +157,6 @@ exec { "set-mysql-password":
     command => "mysqladmin -uroot password root",
 }
 
-# grant mysql remote access
-exec { "grant-mysql-remote-access":
-    require => Exec['set-mysql-password'],
-    path => ["/bin", "/usr/bin"],
-    command => "mysql -uroot -proot -e \"GRANT ALL PRIVILEGES ON *.* TO \'root\'@\'192.168.33.1\' IDENTIFIED BY \'root\'\"",
-}
-
-# mysql configuration
-file { "/etc/mysql/my.cnf":
-    require => Package['apache2', 'mysql-server'],
-    ensure  => "present",
-    mode    => 644,
-    owner   => "root",
-    group   => "root",
-    replace => "yes",
-    content => template('mysql-server/my.cnf.erb'),
-}
-
 # update and upgrade APT
 exec { "apt-update":
     require => File['/etc/apt/sources.list.d/php5.list'],
@@ -254,19 +238,22 @@ file { "/etc/apt/sources.list.d/php5.list":
     content => template('apt/php5.list.erb'),
 }
 
+# install europe/rome timezone
+file { "/etc/timezone":
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('time/timezone.erb'),
+}
+
 #############################
 # install ruby and rubygems #
 #############################
 package { "ruby1.9.3": ensure => "installed", require => Exec['apt-update'] }
 
 # install default gemset
-exec { "install-bundler":
-    require => Package['ruby1.9.3'],
-    unless => "gem list | grep bundler",
-    path => ["/bin", "/usr/bin"],
-    command => "sudo gem install bundler -v 1.6.5"
-}
-
 exec { "install-sass":
     require => Package['ruby1.9.3'],
     unless => "gem list | grep sass",
