@@ -81,7 +81,7 @@ file { '/etc/php5/apache2/php.ini':
     owner   => "root",
     group   => "root",
     replace => "yes",
-    content => template('apache2/php.ini.erb'),
+    content => template('php5/php.ini.erb'),
 }
 
 file { '/etc/php5/cli/php.ini':
