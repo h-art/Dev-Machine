@@ -25,7 +25,7 @@ I sorgenti del progetto devono essere inclusi nella stessa cartella di vagrant.
 
 Per personalizzare il virtualhost dell'ambiente, modificare il file
 
-    [DIRECTORY_DEV_MACHINE]/modules/apache2/default.erb
+    [DIRECTORY_DEV_MACHINE]/modules/apache2/templates/default.erb
 
 ### Devify
 
