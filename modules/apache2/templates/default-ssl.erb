@@ -1,0 +1,14 @@
+<VirtualHost *:443>
+  DocumentRoot "/vagrant/src"
+  DirectoryIndex index.php
+  ServerName myapp.dev
+  SetEnv APP_ENV local
+
+  SSLEngine On
+  SSLCertificateFile "/etc/apache2/server.crt"
+  SSLCertificateKeyFile "/etc/apache2/server.key"
+  <Directory /vagrant/src/web>
+    AllowOverride All
+    Allow from All
+  </Directory>
+</VirtualHost>

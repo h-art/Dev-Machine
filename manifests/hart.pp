@@ -34,6 +34,7 @@ service { "apache2":
     enable  => "true",
     subscribe => File[
         '/etc/apache2/sites-available/default',
+        '/etc/apache2/sites-available/default-ssl',
         '/etc/php5/conf.d/xdebug.ini',
         '/tmp/restart.txt'
     ],
@@ -49,6 +50,28 @@ service { "mysql":
     ],
 }
 
+# setup certificate
+file { "/etc/apache2/server.crt":
+    require => Package['apache2'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('apache2/server.crt'),
+}
+
+file { "/etc/apache2/server.key":
+    require => Package['apache2'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('apache2/server.key'),
+}
+
+
 # set default vhost and reload apache2 when it's done
 file { "/etc/apache2/sites-available/default":
     require => Package['apache2'],
@@ -58,6 +81,23 @@ file { "/etc/apache2/sites-available/default":
     group   => "root",
     replace => "yes",
     content => template('apache2/default.erb'),
+}
+
+file { "/etc/apache2/sites-available/default-ssl":
+    require => Package['apache2'],
+    ensure  => "present",
+    mode    => 644,
+    owner   => "root",
+    group   => "root",
+    replace => "yes",
+    content => template('apache2/default-ssl.erb'),
+}
+
+#enable ssl sites
+file { '/etc/apache2/sites-enabled/default-ssl':
+    require => Package['apache2'],
+    ensure => 'link',
+    target => '/etc/apache2/sites-available/default-ssl',
 }
 
 # set apache2.conf file from template
@@ -92,6 +132,13 @@ file { '/etc/php5/cli/php.ini':
     group   => "root",
     replace => "yes",
     content => template('php5/php.ini.erb'),
+}
+
+# activate mod-ssl
+file { '/etc/apache2/mods-enabled/ssl.load':
+    require => Package['apache2'],
+    ensure => 'link',
+    target => '/etc/apache2/mods-available/ssl.load',
 }
 
 # activate mod-rewrite
